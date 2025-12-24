@@ -1,20 +1,341 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Giáng sinh cho Minh Thư</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="HandheldFriendly" content="true">
-  <title>Thư dỗ em bé</title>
+  <!-- Font giống kiểu chữ đẹp -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/balloon-css/0.5.0/balloon.min.css">
   <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
-  <link rel="stylesheet" href="cheerup.css">
   <meta name="theme-color" content="#09FF63FF">
+
+  <style>
+    /* ===== Background (nền phía sau) ===== */
+    body{
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      /* Gradient từ #C9E4DE đến màu đậm hơn */
+      background: linear-gradient(90deg, #C9E4DE 0%, #6FAFA6 100%);
+      font-family: "Quicksand", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    /* ===== Card container ===== */
+    #card{
+      position: relative;
+      width: 560px;
+      height: 680px;
+      perspective: 3000px;
+      border-radius: 10px;
+      box-shadow: 0 18px 40px rgba(0,0,0,.25);
+    }
+
+    /* 2 mặt */
+    #card-front, #card-inside{
+      position:absolute;
+      inset:0;
+      border-radius: 6px;
+      overflow:hidden;
+      background:#fff;
+    }
+
+    /* ===== Front (mặt ngoài) ===== */
+    #card-front{
+      z-index: 2;
+      transform-origin: left center;
+      transform-style: preserve-3d;
+      transition: transform 1s ease;
+      background: linear-gradient(180deg, #ffd6e5 0%, #ffb6d1 100%);
+    }
+
+    #card-front .wrap{
+      height:100%;
+      padding: 40px 30px;
+      position: relative;
+    }
+    #card-front h4 {
+      margin: 40px 0 0;
+      text-align:center;
+      font-family: "Lobster", cursive;
+      font-size: 24px;
+      line-height: 1;
+      color: #fff;
+      text-shadow: 4px 4px 0 rgba(0,0,0,.10);
+    }
+    #card-front h1{
+      margin: 40px 0 0;
+      text-align:center;
+      font-family: "Lobster", cursive;
+      font-size: 64px;
+      line-height: 1;
+      color: #fff;
+      text-shadow: 4px 4px 0 rgba(0,0,0,.10);
+    }
+    .cake_and_velas {
+      position: absolute;
+      bottom: 25%;
+      left: 0;
+      right: 0;
+      overflow: hidden;
+    }
+
+    #cake {
+      display: block;
+      position: relative;
+      margin: -10em auto 0 auto;
+    }
+
+    .velas {
+      background: #ffffff;
+      border-radius: 10px;
+      position: absolute;
+      top: 228px;
+      left: 50%;
+      margin-left: -2.4px;
+      margin-top: -8.33333333px;
+      width: 5px;
+      height: 35px;
+      -webkit-transform: translateY(-300px);
+      transform: translateY(-300px);
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      -webkit-animation: in 500ms 5s ease-out forwards;
+      animation: in 500ms 5s ease-out forwards;
+    }
+
+    .velas:after,
+    .velas:before {
+      background: rgba(255, 0, 0, 0.4);
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 2.22222222px;
+    }
+
+    .velas:after {
+      top: 25%;
+      left: 0;
+    }
+
+    .velas:before {
+      top: 45%;
+      left: 0;
+    }
+
+    /* ============================================== Fire
+    */
+    .fuego {
+      border-radius: 100%;
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      margin-left: -2.6px;
+      width: 6.66666667px;
+      background: radial-gradient(circle at 50% 30%, #fff7b0 0%, #ffd36a 30%, #ff8a00 60%, #ff3d00 100%);
+      box-shadow: 0 0 18px rgba(255, 140, 0, .55);
+      height: 18px;
+    }
+
+    .fuego:nth-child(1) {
+      -webkit-animation: fuego 2s 5.5s infinite;
+      animation: fuego 2s 5.5s infinite;
+    }
+
+    .fuego:nth-child(2) {
+      -webkit-animation: fuego 1.5s 5.5s infinite;
+      animation: fuego 1.5s 5.5s infinite;
+    }
+
+    .fuego:nth-child(3) {
+      -webkit-animation: fuego 1s 5.5s infinite;
+      animation: fuego 1s 5.5s infinite;
+    }
+
+    .fuego:nth-child(4) {
+      -webkit-animation: fuego 0.5s 5.5s infinite;
+      animation: fuego 0.5s 5.5s infinite;
+    }
+
+    .fuego:nth-child(5) {
+      -webkit-animation: fuego 0.2s 5.5s infinite;
+      animation: fuego 0.2s 5.5s infinite;
+    }
+
+
+    @keyframes flame{
+      0%{ transform: translateX(-50%) translateY(0) scale(1); opacity:.9;}
+      50%{ transform: translateX(-50%) translateY(-2px) scale(1.08); opacity:1;}
+      100%{ transform: translateX(-50%) translateY(0) scale(1); opacity:.9;}
+    }
+
+    /* polaroid */
+    .card-front_inside{
+      position:absolute;
+      right: 25px;
+      bottom: 25px;
+      width: 160px;
+      height: 210px;
+      pointer-events:none;
+    }
+    .polaroid{
+      width:100%;
+      height:100%;
+      background:#fff;
+      border-radius: 8px;
+      padding: 10px 10px 30px;
+      box-shadow: 0 14px 28px rgba(0,0,0,.2);
+      transform: rotate(-8deg);
+      position: relative;
+      z-index: 2;
+    }
+    .polaroid .img{
+      width:100%;
+      height:100%;
+      border-radius: 6px;
+      background: #111;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .shadow{
+      position:absolute;
+      inset:0;
+      border-radius: 8px;
+      box-shadow: 0 24px 40px rgba(0,0,0,.25);
+      opacity:.25;
+      transform: rotate(-8deg);
+      z-index: 1;
+    }
+
+    /* ===== Inside (mặt trong) ===== */
+    #card-inside{
+      z-index: 1;
+      background: #ffeef1;
+    }
+
+    #card-inside .wrap{
+      height:100%;
+      display:flex;
+    }
+    .xmastree {
+      height: 90vh;
+      margin-left: 0;
+      display: flex;
+    }
+    /* cột trái (ảnh) */
+    .inside-left{
+      width: 44%;
+      border-right: 1px solid rgba(0,0,0,.08);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 30px;
+    }
+    .inside-left .polaroid{
+      transform: rotate(-8deg);
+      width: 260px;
+      height: 220px;
+      padding: 12px 12px 34px;
+    }
+
+    /* cột phải (text) */
+    .inside-right{
+      width: 56%;
+      padding: 40px 30px 80px;
+      position: relative;
+    }
+
+    .wishesFont{
+      font-family: "Quicksand", sans-serif;
+      font-size: 18px;
+      line-height: 1.6;
+      text-align:center;
+      color:#2a2a2a;
+    }
+
+    /* Pages */
+    .pages .page{ display:none; }
+    .pages .page.active{ display:block; }
+
+    /* Indicator */
+    #pageIndicator{
+      position:absolute;
+      left: 0;
+      right: 0;
+      bottom: 18px;
+      text-align:center;
+      font-size: 14px;
+      opacity: .7;
+    }
+
+    /* ===== Open/Close + NextPage buttons ===== */
+    #open, #close, #nextPage{
+      position:absolute;
+      bottom: 18px;
+      width: 44px;
+      height: 56px;
+      border: none;
+      cursor: pointer;
+      background: #09FF63;
+      color:#fff;
+      font-family: "Lobster", cursive;
+      font-size: 26px;
+      border-radius: 3px;
+      box-shadow: 2px 2px 3px rgba(0,0,0,0.25), 0 0 1px rgba(0,0,0,0.4);
+      z-index: 999;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      user-select:none;
+    }
+    @keyframes in {
+      from { transform: translateY(-300px); }
+      to   { transform: translateY(0); }
+    }
+
+    /* Animation cho lửa nhấp nháy (đang bị thiếu) */
+    @keyframes fuego {
+      0%, 100% { transform: translateY(0) scale(1); opacity: .9; }
+      50%      { transform: translateY(-3px) scale(1.12); opacity: 1; }
+    }
+        #open{ right: -12px; }
+    #close{ left: -12px; display:none; }
+    #nextPage{ right: -12px; display:none; } /* đối xứng với close */
+
+    /* ===== Flip states (giống kiểu cheerup.js thường dùng) ===== */
+    /* Default: close fully */
+    #card.close-fully #card-front { transform: rotateY(0deg); }
+    #card.open-half  #card-front  { transform: rotateY(-90deg); }
+    #card.open-fully #card-front  { transform: rotateY(-180deg); }
+
+    /* Khi mở fully: ẩn open, hiện close + nextPage */
+    #card.open-fully #open{ display:none; }
+    #card.open-fully #close{ display:flex; }
+    #card.open-fully #nextPage{ display:flex; }
+
+    /* Khi đóng: chỉ hiện open */
+    #card.close-fully #open{ display:flex; }
+    #card.close-fully #close{ display:none; }
+    #card.close-fully #nextPage{ display:none; }
+
+    /* Responsive */
+    @media (max-width: 640px){
+      #card{ width: 92vw; height: 70vh; }
+      #card-front h1{ font-size: 46px; }
+      .inside-left{ display:none; }
+      .inside-right{ width: 100%; }
+    }
+  </style>
 </head>
 
 <body>
@@ -23,28 +344,83 @@
   <br>
   <br>
   <br>
-  <div id="card">
-    <div id="card-inside">
-      <div class="wrap wishesFont">
-        <center>
-          <p> Em là một em bé thông minh, mọi vấn đề gì xảy đến em đều vượt qua hết òi, từ vui đến buồn đến đau khổ đến
-            hạnh phúc, nên vấn đề hiện tại chỉ là vấn đề nhỏ của em và của chúng ta thoi đúng hong nè :> &nbsp; </p>
-          <p> Lúc này là lúc em bé nên tận hưởng nè, hoặc hong tận hưởng thì ít nhất cũng nên vui vẻ. Ở đây em hong hề
-            tủi thân đâu, đặc biệt là Phúc Thành của em lúc nào cũng đang kéo tinh thần em bé đóooooo
-            <br>
-          <p> Anh chỉ muốn nói với em là</p>
-          Anh thương em thật lòng. Mọi chuyện rồi sẽ ổn thôi, vì có anh ở đây với em gòiii :>.
-          </p>
-        </center>
-        <p class="signed">Chúc em bé hãy vững vàng!
-          <br> Tomietine của em
-        </p>
+  <div class="xmastree">
+  
+  <svg width="100%" height="100%" viewBox="0 0 280 568" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;"><path id="shadow" d="M138.574,408l-138.564,80l138.564,80l138.564,-80l-138.564,-80Z" style="fill-opacity:0.2;"/><path d="M166.287,337l-55.425,0l0,151l27.712,16l27.713,-16l0,-151Z" style="fill:#332b1c;"/><clipPath id="_clip1"><path d="M166.287,337l-55.425,0l0,151l27.712,16l27.713,-16l0,-151Z"/></clipPath><g clip-path="url(#_clip1)"><rect x="138.574" y="400" width="41.569" height="128" style="fill:#43351a;"/></g><path d="M138.574,440l0,12l27.713,-16l0,-12l-27.713,16Z" style="fill:#302511;"/><path d="M138.574,440l0,12l-27.712,-16l0,-12l27.712,16Z" style="fill:#231d13;"/><g><path d="M277.138,360l-138.564,-240l-138.564,240l138.564,80l138.564,-80Z" style="fill:#1f5721;"/><clipPath id="_clip2"><path d="M277.138,360l-138.564,-240l-138.564,240l138.564,80l138.564,-80Z"/></clipPath><g clip-path="url(#_clip2)"><rect x="138.574" y="280.923" width="154.019" height="169.077" style="fill:#236b17;"/><path d="M138.55,431.996c0.575,-0.206 10.138,-3.634 12.547,-4.915c4.542,-2.414 9.508,-8.204 13.674,-11.075c3.914,-2.696 12.729,-4.777 16.326,-6.312c2.806,-1.199 7.898,-6.91 16.152,-11.856c4.687,-2.808 10.999,-3.502 15.496,-5.646c2.243,-1.069 7.31,-6.686 13.914,-10.723c4.673,-2.858 6.813,-1.529 11.077,-3.613c2.122,-1.037 6.496,-6.121 13.386,-10.652c4.642,-3.053 9.92,-3.107 14.331,-5.549c5.43,-3.005 9.547,-8.081 9.547,-8.081l2.948,6.42l-139.374,79.97l0,0.03l-0.025,-0.015l-0.026,0.015l0,-0.03l-139.374,-78.97l2.948,-8.42c0,0 3.632,5.612 10.545,9.352c4.113,2.225 10.68,1.85 14.784,4.562c5.266,3.481 8.998,9.417 11.479,10.492c5.035,2.18 12.727,3.893 17.765,6.895c6.205,3.697 10.656,8.88 13.136,10.164c4.899,2.534 11.389,3.639 16.183,6.989c6.739,4.711 10.712,9.684 13.011,10.666c3.598,1.535 12.412,3.616 16.326,6.312c4.166,2.871 6.633,4.329 10.674,7.994c2.025,1.836 11.99,5.776 12.55,5.996Z" style="fill:#a8bca7;"/></g><path d="M249.426,280l-110.852,-192l-110.851,192l110.851,64l110.852,-64Z" style="fill:#1f5721;"/><clipPath id="_clip3"><path d="M249.426,280l-110.852,-192l-110.851,192l110.851,64l110.852,-64Z"/></clipPath><g clip-path="url(#_clip3)"><rect x="138.574" y="192" width="117.779" height="172" style="fill:#236b17;"/><path d="M138.55,335.996c0.575,-0.206 10.138,-3.634 12.547,-4.915c4.542,-2.414 9.508,-8.204 13.674,-11.075c3.914,-2.696 12.729,-4.777 16.326,-6.312c2.806,-1.199 7.898,-6.91 16.152,-11.856c4.687,-2.808 10.999,-3.502 15.496,-5.646c2.243,-1.069 7.31,-6.686 13.914,-10.723c4.673,-2.858 6.813,-1.529 11.077,-3.613c5.311,-2.596 12.264,-8.282 12.264,-8.282l-0.052,6.42l-111.374,63.97l0,0.03l-0.025,-0.015l-0.026,0.015l0,-0.03l-111.374,-63.97l-0.052,-7.42c0,0 4.144,5.087 11.808,8.406c5.035,2.18 12.727,3.893 17.765,6.895c6.205,3.697 10.656,8.88 13.136,10.164c4.899,2.534 11.389,3.639 16.183,6.989c6.739,4.711 10.712,9.684 13.011,10.666c3.598,1.535 12.412,3.616 16.326,6.312c4.166,2.871 6.633,4.329 10.674,7.994c2.025,1.836 11.99,5.776 12.55,5.996Z" style="fill:#a8bca7;"/></g><path d="M221.713,200l-83.139,-144l-83.138,144l83.138,48l83.139,-48Z" style="fill:#1f5721;"/><clipPath id="_clip4"><path d="M221.713,200l-83.139,-144l-83.138,144l83.138,48l83.139,-48Z"/></clipPath><g clip-path="url(#_clip4)"><rect x="138.574" y="88" width="90.067" height="184" style="fill:#236b17;"/><path d="M138.55,239.996c0.575,-0.206 10.138,-3.634 12.547,-4.915c4.542,-2.414 9.508,-8.204 13.674,-11.075c3.914,-2.696 12.729,-4.777 16.326,-6.312c2.806,-1.199 7.898,-6.91 16.152,-11.856c4.687,-2.808 10.999,-3.502 15.496,-5.646c5.806,-2.767 9.255,-6.618 9.255,-6.618l-0.052,6.42l-83.374,47.97l0,0.03l-0.025,-0.015l-0.026,0.015l0,-0.03l-83.374,-47.97l1.948,-8.42c0,0 5.15,6.553 12.709,10.465c4.899,2.534 11.389,3.639 16.183,6.989c6.739,4.711 10.712,9.684 13.011,10.666c3.598,1.535 12.412,3.616 16.326,6.312c4.166,2.871 6.633,4.329 10.674,7.994c2.025,1.836 11.99,5.776 12.55,5.996Z" style="fill:#a8bca7;"/></g><path d="M194,120l-55.426,-96l-55.425,96l55.425,32l55.426,-32Z" style="fill:#1f5721;"/><clipPath id="_clip5"><path d="M194,120l-55.426,-96l-55.425,96l55.425,32l55.426,-32Z"/></clipPath><g clip-path="url(#_clip5)"><rect x="138.574" y="-16" width="69.282" height="184" style="fill:#236b17;"/><path d="M138.55,143.996c0.575,-0.206 10.138,-3.634 12.547,-4.915c4.542,-2.414 9.508,-8.204 13.674,-11.075c3.914,-2.696 12.729,-4.777 16.326,-6.312c6.457,-2.757 12.903,-10.12 12.903,-10.12l-0.052,8.42l-55.374,31.97l0,0.03l-0.025,-0.015l-0.026,0.015l0,-0.03l-55.374,-31.97l1.948,-8.42c0,0 7.446,10.363 13.903,13.12c3.598,1.535 12.412,2.616 16.326,5.312c4.166,2.871 6.633,4.329 10.674,7.994c2.025,1.836 11.99,5.776 12.55,5.996Z" style="fill:#a8bca7;"/></g></g><g><path d="M138.574,168l0,-16l41.57,-24l6.928,12l-48.498,28Z" style="fill:#005300;"/><path d="M138.574,264l0,-16l69.282,-40l6.929,12l-76.211,44Z" style="fill:#005300;"/><path d="M138.574,360l0,-16l96.995,-56l6.928,12l-103.923,60Z" style="fill:#005300;"/></g><g><path d="M138.574,168l0,-16l-41.569,-24l-6.928,12l48.497,28Z" style="fill:#134014;"/><path d="M138.574,264l0,-16l-69.282,-40l-6.928,12l76.21,44Z" style="fill:#134014;"/><path d="M138.574,360l0,-16l-96.995,-56l-6.928,12l103.923,60Z" style="fill:#134014;"/></g><g id="globe_quartersize"><path d="M101.031,280.327l-2.296,-1.325l3.465,-2.001l6.93,4.001l0,4.002l0.01,9.989l-0.01,-9.989l10.395,-6.002l0.01,10.001l-0.02,0.012l-1.723,2.983l-8.662,5.002l-8.662,-5.002l-1.733,-3.001l0.01,0.006l-0.01,-10.001l2.296,1.325Zm8.099,15.823l0,-1.151l0,1.151Zm10.395,-17.148l-10.395,6.002l0,-4.002l6.93,-4.001l3.465,2.001Zm-17.325,-2.001l6.93,4.001l6.93,-4.001l-6.93,-4.001l-6.93,4.001Z" style="fill:#fe0;"/><path d="M119.525,279.002l-10.395,6.002l0.01,10.001l10.395,-6.002l-0.01,-10.001Z" style="fill:#ffda00;"/><path d="M98.735,279.002l10.395,6.002l0.01,10.001l-10.395,-6.002l-0.01,-10.001Z" style="fill:#f1bc00;"/><path d="M100.468,291.998l8.662,5.002l0,-2.001l-10.395,-6.002l1.733,3.001Z" style="fill:#e5ad00;"/><path d="M117.792,291.998l-8.662,5.002l0,-2.001l10.395,-6.002l-1.733,3.001Z" style="fill:#f3c800;"/><path d="M98.735,279.002l10.395,6.002l0,-4.002l-6.93,-4.001l-3.465,2.001Z" style="fill:#f8c700;"/><path d="M119.525,279.002l-10.395,6.002l0,-4.002l6.93,-4.001l3.465,2.001Z" style="fill:#ffe200;"/><path d="M102.2,277.001l6.93,4.001l6.93,-4.001l-6.93,-4.001l-6.93,4.001Z" style="fill:#fe0;"/></g><g id="globe_quartersize1" serif:id="globe_quartersize"><path d="M220.542,327.327l-2.296,-1.325l3.465,-2.001l6.93,4.002l0,4.001l0.01,9.989l-0.01,-9.989l10.395,-6.002l0.01,10.001l-0.02,0.012l-1.723,2.983l-8.662,5.002l-8.662,-5.002l-1.733,-3.001l0.01,0.006l-0.01,-10.001l2.296,1.325Zm8.099,15.823l0,-1.151l0,1.151Zm10.395,-17.148l-10.395,6.002l0,-4.001l6.93,-4.002l3.465,2.001Zm-17.325,-2.001l6.93,4.002l6.93,-4.002l-6.93,-4.001l-6.93,4.001Z" style="fill:#fe0;"/><path d="M239.036,326.002l-10.395,6.002l0.01,10.001l10.395,-6.002l-0.01,-10.001Z" style="fill:#ffda00;"/><path d="M218.246,326.002l10.395,6.002l0.01,10.001l-10.395,-6.002l-0.01,-10.001Z" style="fill:#f1bc00;"/><path d="M219.979,338.998l8.662,5.002l0,-2.001l-10.395,-6.002l1.733,3.001Z" style="fill:#e5ad00;"/><path d="M237.303,338.998l-8.662,5.002l0,-2.001l10.395,-6.002l-1.733,3.001Z" style="fill:#f3c800;"/><path d="M218.246,326.002l10.395,6.002l0,-4.001l-6.93,-4.002l-3.465,2.001Z" style="fill:#f8c700;"/><path d="M239.036,326.002l-10.395,6.002l0,-4.001l6.93,-4.002l3.465,2.001Z" style="fill:#ffe200;"/><path d="M221.711,324.001l6.93,4.002l6.93,-4.002l-6.93,-4.001l-6.93,4.001Z" style="fill:#fe0;"/></g><g id="globe_red"><path d="M165.118,183.326l-2.295,-1.325l3.465,-2.001l6.93,4.001l0,4.002l0.01,9.989l-0.01,-9.989l10.395,-6.002l0.01,10.001l-0.02,0.012l-1.723,2.983l-8.662,5.002l-8.662,-5.002l-1.733,-3.001l0.01,0.006l-0.01,-10.001l2.295,1.325Zm8.1,15.823l0,-1.151l0,1.151Zm10.395,-17.148l-10.395,6.002l0,-4.002l6.93,-4.001l3.465,2.001Zm-17.325,-2.001l6.93,4.001l6.93,-4.001l-6.93,-4.001l-6.93,4.001Z" style="fill:#ab0009;"/><path d="M183.608,182.004l-10.395,6.002l0.01,10.001l10.395,-6.002l-0.01,-10.001Z" style="fill:#c10010;"/><path d="M162.818,182.004l10.395,6.002l0.01,10.001l-10.395,-6.002l-0.01,-10.001Z" style="fill:#aa0008;"/><path d="M164.55,195l8.663,5.001l0,-2l-10.395,-6.002l1.732,3.001Z" style="fill:#8f0a12;"/><path d="M181.875,195l-8.662,5.001l0,-2l10.395,-6.002l-1.733,3.001Z" style="fill:#a41200;"/><path d="M162.818,182.004l10.395,6.002l0,-4.002l-6.93,-4.001l-3.465,2.001Z" style="fill:#c6000b;"/><path d="M183.608,182.004l-10.395,6.002l0,-4.002l6.93,-4.001l3.465,2.001Z" style="fill:#e51806;"/><path d="M166.283,180.003l6.93,4.001l6.93,-4.001l-6.93,-4.002l-6.93,4.002Z" style="fill:#ed1906;"/></g><g id="globe_red1" serif:id="globe_red"><path d="M165.116,371.327l-2.296,-1.325l3.465,-2.001l6.93,4.002l0,4.001l0.011,9.989l-0.011,-9.989l10.395,-6.002l0.01,10.001l-0.02,0.012l-1.722,2.983l-8.663,5.002l-8.662,-5.002l-1.733,-3.001l0.011,0.006l-0.011,-10.001l2.296,1.325Zm8.099,15.823l0,-1.151l0,1.151Zm10.395,-17.148l-10.395,6.002l0,-4.001l6.93,-4.002l3.465,2.001Zm-17.325,-2.001l6.93,4.002l6.93,-4.002l-6.93,-4.001l-6.93,4.001Z" style="fill:#ab0009;"/><path d="M183.605,370.005l-10.395,6.002l0.01,10.001l10.395,-6.002l-0.01,-10.001Z" style="fill:#c10010;"/><path d="M162.815,370.005l10.395,6.002l0.01,10.001l-10.394,-6.002l-0.011,-10.001Z" style="fill:#aa0008;"/><path d="M164.548,383.001l8.662,5.002l0,-2.001l-10.395,-6.002l1.733,3.001Z" style="fill:#8f0a12;"/><path d="M181.873,383.001l-8.663,5.002l0,-2.001l10.395,-6.002l-1.732,3.001Z" style="fill:#a41200;"/><path d="M162.815,370.005l10.395,6.002l0,-4.001l-6.93,-4.002l-3.465,2.001Z" style="fill:#c6000b;"/><path d="M183.605,370.005l-10.395,6.002l0,-4.001l6.93,-4.002l3.465,2.001Z" style="fill:#e51806;"/><path d="M166.28,368.004l6.93,4.002l6.93,-4.002l-6.93,-4.001l-6.93,4.001Z" style="fill:#ed1906;"/></g><g id="globe_red2" serif:id="globe_red"><path d="M66.392,248.326l-2.295,-1.326l3.465,-2l6.93,4.001l0,4.001l0.01,9.99l-0.01,-9.99l10.395,-6.002l0.01,10.001l-0.021,0.012l-1.722,2.983l-8.662,5.002l-8.663,-5.002l-1.732,-3.001l0.01,0.006l-0.01,-10.001l2.295,1.326Zm8.1,15.822l0,-1.151l0,1.151Zm10.395,-17.148l-10.395,6.002l0,-4.001l6.93,-4.001l3.465,2Zm-17.325,-2l6.93,4.001l6.93,-4.001l-6.93,-4.002l-6.93,4.002Z" style="fill:#ab0009;"/><path d="M84.881,247.003l-10.394,6.002l0.01,10.001l10.395,-6.002l-0.011,-10.001Z" style="fill:#c10010;"/><path d="M64.092,247.003l10.395,6.002l0.01,10.001l-10.395,-6.002l-0.01,-10.001Z" style="fill:#aa0008;"/><path d="M65.824,259.999l8.663,5.002l0,-2.001l-10.395,-6.002l1.732,3.001Z" style="fill:#8f0a12;"/><path d="M83.149,259.999l-8.662,5.002l0,-2.001l10.394,-6.002l-1.732,3.001Z" style="fill:#a41200;"/><path d="M64.092,247.003l10.395,6.002l0,-4.001l-6.93,-4.002l-3.465,2.001Z" style="fill:#c6000b;"/><path d="M84.881,247.003l-10.394,6.002l0,-4.001l6.929,-4.002l3.465,2.001Z" style="fill:#e51806;"/><path d="M67.557,245.002l6.93,4.002l6.929,-4.002l-6.929,-4.001l-6.93,4.001Z" style="fill:#ed1906;"/></g><g id="globe_blue"><path d="M196.295,250.326l-2.295,-1.325l3.465,-2.001l6.93,4.001l0,4.002l0.01,9.989l-0.01,-9.989l10.395,-6.002l0.01,10.001l-0.021,0.012l-1.722,2.983l-8.662,5.002l-8.663,-5.002l-1.732,-3.001l0.01,0.006l-0.01,-10.001l2.295,1.325Zm8.1,15.823l0,-1.151l0,1.151Zm10.395,-17.148l-10.395,6.002l0,-4.002l6.93,-4.001l3.465,2.001Zm-17.325,-2.001l6.93,4.001l6.93,-4.001l-6.93,-4.001l-6.93,4.001Z" style="fill:#00829f;"/><path d="M214.785,249.004l-10.395,6.002l0.01,10.001l10.395,-6.002l-0.01,-10.001Z" style="fill:#009ab4;"/><path d="M193.995,249.004l10.395,6.002l0.01,10.001l-10.395,-6.002l-0.01,-10.001Z" style="fill:#00829f;"/><path d="M195.727,262l8.663,5.001l0,-2l-10.395,-6.002l1.732,3.001Z" style="fill:#006a85;"/><path d="M213.052,262l-8.662,5.001l0,-2l10.395,-6.002l-1.733,3.001Z" style="fill:#008499;"/><path d="M193.995,249.004l10.395,6.002l0,-4.002l-6.93,-4.001l-3.465,2.001Z" style="fill:#009cb8;"/><path d="M214.785,249.004l-10.395,6.002l0,-4.002l6.93,-4.001l3.465,2.001Z" style="fill:#00b1d7;"/><path d="M197.46,247.003l6.93,4.001l6.93,-4.001l-6.93,-4.002l-6.93,4.002Z" style="fill:#00c1de;"/></g><g id="globe_blue1" serif:id="globe_blue"><path d="M95.836,367.326l-2.295,-1.325l3.465,-2.001l6.93,4.001l0,4.002l0.01,9.989l-0.01,-9.989l10.395,-6.002l0.01,10.001l-0.021,0.012l-1.722,2.983l-8.662,5.002l-8.663,-5.002l-1.732,-3.001l0.01,0.006l-0.01,-10.001l2.295,1.325Zm8.1,15.823l0,-1.151l0,1.151Zm10.395,-17.148l-10.395,6.002l0,-4.002l6.93,-4.001l3.465,2.001Zm-17.325,-2.001l6.93,4.001l6.93,-4.001l-6.93,-4.001l-6.93,4.001Z" style="fill:#00829f;"/><path d="M114.326,366.004l-10.395,6.002l0.01,10.001l10.395,-6.002l-0.01,-10.001Z" style="fill:#009ab4;"/><path d="M93.536,366.004l10.395,6.002l0.01,10.001l-10.395,-6.002l-0.01,-10.001Z" style="fill:#00829f;"/><path d="M95.268,379l8.663,5.001l0,-2l-10.395,-6.002l1.732,3.001Z" style="fill:#006a85;"/><path d="M112.593,379l-8.662,5.001l0,-2l10.395,-6.002l-1.733,3.001Z" style="fill:#008499;"/><path d="M93.536,366.004l10.395,6.002l0,-4.002l-6.93,-4.001l-3.465,2.001Z" style="fill:#009cb8;"/><path d="M114.326,366.004l-10.395,6.002l0,-4.002l6.93,-4.001l3.465,2.001Z" style="fill:#00b1d7;"/><path d="M97.001,364.003l6.93,4.001l6.93,-4.001l-6.93,-4.002l-6.93,4.002Z" style="fill:#00c1de;"/></g><g id="globe_blue2" serif:id="globe_blue"><path d="M99.27,173.305l-2.296,-1.325l3.465,-2.001l6.93,4.002l0,4.001l0.01,9.989l-0.01,-9.989l10.395,-6.002l0.01,10.001l-0.02,0.012l-1.722,2.983l-8.663,5.002l-8.662,-5.002l-1.733,-3.001l0.011,0.006l-0.011,-10.001l2.296,1.325Zm8.099,15.823l0,-1.151l0,1.151Zm10.395,-17.148l-10.395,6.002l0,-4.001l6.93,-4.002l3.465,2.001Zm-17.325,-2.001l6.93,4.002l6.93,-4.002l-6.93,-4.001l-6.93,4.001Z" style="fill:#00829f;"/><path d="M117.759,171.983l-10.395,6.002l0.01,10.001l10.395,-6.002l-0.01,-10.001Z" style="fill:#009ab4;"/><path d="M96.969,171.983l10.395,6.002l0.01,10.001l-10.395,-6.002l-0.01,-10.001Z" style="fill:#00829f;"/><path d="M98.702,184.979l8.662,5.002l0,-2.001l-10.395,-6.002l1.733,3.001Z" style="fill:#006a85;"/><path d="M116.026,184.979l-8.662,5.002l0,-2.001l10.395,-6.002l-1.733,3.001Z" style="fill:#008499;"/><path d="M96.969,171.983l10.395,6.002l0,-4.002l-6.93,-4.001l-3.465,2.001Z" style="fill:#009cb8;"/><path d="M117.759,171.983l-10.395,6.002l0,-4.002l6.93,-4.001l3.465,2.001Z" style="fill:#00b1d7;"/><path d="M100.434,169.982l6.93,4.001l6.93,-4.001l-6.93,-4.001l-6.93,4.001Z" style="fill:#00c1de;"/></g><g id="globe_blue3" serif:id="globe_blue"><path d="M147.8,84.324l-2.295,-1.325l3.465,-2.001l6.93,4.002l0,4.001l0.01,9.989l-0.01,-9.989l10.395,-6.002l0.01,10.001l-0.02,0.012l-1.723,2.983l-8.662,5.002l-8.662,-5.002l-1.733,-3.001l0.01,0.006l-0.01,-10.001l2.295,1.325Zm8.1,15.823l0,-1.151l0,1.151Zm10.395,-17.148l-10.395,6.002l0,-4.001l6.93,-4.002l3.465,2.001Zm-17.325,-2.001l6.93,4.002l6.93,-4.002l-6.93,-4.001l-6.93,4.001Z" style="fill:#00829f;"/><path d="M166.29,83.002l-10.395,6.002l0.01,10.001l10.395,-6.002l-0.01,-10.001Z" style="fill:#009ab4;"/><path d="M145.5,83.002l10.395,6.002l0.01,10.001l-10.395,-6.002l-0.01,-10.001Z" style="fill:#00829f;"/><path d="M147.232,95.998l8.663,5.002l0,-2.001l-10.395,-6.002l1.732,3.001Z" style="fill:#006a85;"/><path d="M164.557,95.998l-8.662,5.002l0,-2.001l10.395,-6.002l-1.733,3.001Z" style="fill:#008499;"/><path d="M145.5,83.002l10.395,6.002l0,-4.001l-6.93,-4.002l-3.465,2.001Z" style="fill:#009cb8;"/><path d="M166.29,83.002l-10.395,6.002l0,-4.001l6.93,-4.002l3.465,2.001Z" style="fill:#00b1d7;"/><path d="M148.965,81.001l6.93,4.002l6.93,-4.002l-6.93,-4.001l-6.93,4.001Z" style="fill:#00c1de;"/></g><g id="globe_purple"><path d="M110.229,92.326l-2.296,-1.325l3.465,-2.001l6.93,4.001l0,4.002l0.01,9.989l-0.01,-9.989l10.395,-6.002l0.01,10.001l-0.02,0.012l-1.722,2.983l-8.663,5.002l-8.662,-5.002l-1.733,-3.001l0.011,0.006l-0.011,-10.001l2.296,1.325Zm8.099,15.823l0,-1.151l0,1.151Zm10.395,-17.148l-10.395,6.002l0,-4.002l6.93,-4.001l3.465,2.001Zm-17.325,-2.001l6.93,4.001l6.93,-4.001l-6.93,-4.001l-6.93,4.001Z" style="fill:#3716a2;"/><path d="M128.718,91.004l-10.395,6.002l0.01,10.001l10.395,-6.002l-0.01,-10.001Z" style="fill:#7d12b7;"/><path d="M107.928,91.004l10.395,6.002l0.01,10.001l-10.395,-6.002l-0.01,-10.001Z" style="fill:#5a11a2;"/><path d="M109.661,104l8.662,5.001l0,-2l-10.395,-6.002l1.733,3.001Z" style="fill:#461788;"/><path d="M126.985,104l-8.662,5.001l0,-2l10.395,-6.002l-1.733,3.001Z" style="fill:#71009c;"/><path d="M107.928,91.004l10.395,6.002l0,-4.002l-6.93,-4.001l-3.465,2.001Z" style="fill:#7d00bc;"/><path d="M128.718,91.004l-10.395,6.002l0,-4.002l6.93,-4.001l3.465,2.001Z" style="fill:#9811db;"/><path d="M111.393,89.003l6.93,4.001l6.93,-4.001l-6.93,-4.002l-6.93,4.002Z" style="fill:#a90ce2;"/></g><g id="globe_purple1" serif:id="globe_purple"><path d="M40.411,343.326l-2.296,-1.325l3.465,-2.001l6.93,4.001l0,4.002l0.01,9.989l-0.01,-9.989l10.395,-6.002l0.01,10.001l-0.02,0.012l-1.722,2.983l-8.663,5.002l-8.662,-5.002l-1.733,-3.001l0.011,0.006l-0.011,-10.001l2.296,1.325Zm8.099,15.823l0,-1.151l0,1.151Zm10.395,-17.148l-10.395,6.002l0,-4.002l6.93,-4.001l3.465,2.001Zm-17.325,-2.001l6.93,4.001l6.93,-4.001l-6.93,-4.001l-6.93,4.001Z" style="fill:#3716a2;"/><path d="M58.9,342.004l-10.395,6.002l0.01,10.001l10.395,-6.002l-0.01,-10.001Z" style="fill:#7d12b7;"/><path d="M38.11,342.004l10.395,6.002l0.01,10.001l-10.395,-6.002l-0.01,-10.001Z" style="fill:#5a11a2;"/><path d="M39.843,355l8.662,5.001l0,-2l-10.395,-6.002l1.733,3.001Z" style="fill:#461788;"/><path d="M57.168,355l-8.663,5.001l0,-2l10.395,-6.002l-1.732,3.001Z" style="fill:#71009c;"/><path d="M38.11,342.004l10.395,6.002l0,-4.002l-6.93,-4.001l-3.465,2.001Z" style="fill:#7d00bc;"/><path d="M58.9,342.004l-10.395,6.002l0,-4.002l6.93,-4.001l3.465,2.001Z" style="fill:#9811db;"/><path d="M41.575,340.003l6.93,4.001l6.93,-4.001l-6.93,-4.002l-6.93,4.002Z" style="fill:#a90ce2;"/></g><g id="globe_purple2" serif:id="globe_purple"><path d="M162.652,266.327l-2.296,-1.325l3.465,-2.001l6.93,4.002l0,4.001l0.01,9.989l-0.01,-9.989l10.395,-6.002l0.01,10.001l-0.02,0.012l-1.722,2.983l-8.663,5.002l-8.662,-5.002l-1.733,-3.001l0.011,0.006l-0.011,-10.001l2.296,1.325Zm8.099,15.823l0,-1.151l0,1.151Zm10.395,-17.148l-10.395,6.002l0,-4.001l6.93,-4.002l3.465,2.001Zm-17.325,-2.001l6.93,4.002l6.93,-4.002l-6.93,-4.001l-6.93,4.001Z" style="fill:#3716a2;"/><path d="M181.141,265.005l-10.395,6.002l0.01,10.001l10.395,-6.002l-0.01,-10.001Z" style="fill:#7d12b7;"/><path d="M160.351,265.005l10.395,6.002l0.01,10.001l-10.395,-6.002l-0.01,-10.001Z" style="fill:#5a11a2;"/><path d="M162.084,278.001l8.662,5.002l0,-2.001l-10.395,-6.002l1.733,3.001Z" style="fill:#461788;"/><path d="M179.409,278.001l-8.663,5.002l0,-2.001l10.395,-6.002l-1.732,3.001Z" style="fill:#71009c;"/><path d="M160.351,265.005l10.395,6.002l0,-4.001l-6.93,-4.002l-3.465,2.001Z" style="fill:#7d00bc;"/><path d="M181.141,265.005l-10.395,6.002l0,-4.001l6.93,-4.002l3.465,2.001Z" style="fill:#9811db;"/><path d="M163.816,263.004l6.93,4.002l6.93,-4.002l-6.93,-4.001l-6.93,4.001Z" style="fill:#a90ce2;"/></g><g id="treeTop"><path d="M122.365,14.655l-4.591,-2.651l6.93,-4.001l13.86,8.002l0,8.003l0.021,19.979l-0.021,-19.979l20.79,-12.004l0.02,20.002l-0.041,0.024l-3.444,5.967l-17.325,10.003l-17.325,-10.003l-3.465,-6.002l0.021,0.011l-0.021,-20.002l4.591,2.651Zm16.199,31.646l0,-2.302l0,2.302Zm20.79,-34.297l-20.79,12.004l0,-8.003l13.86,-8.002l6.93,4.001Zm-34.65,-4.001l13.86,8.002l13.86,-8.002l-13.86,-8.003l-13.86,8.003Z" style="fill:#ffda00;"/><path d="M159.354,12.004l-20.79,12.004l0.021,20.002l20.789,-12.004l-0.02,-20.002Z" style="fill:#ffda00;"/><path d="M117.774,12.004l20.79,12.004l0.021,20.002l-20.79,-12.004l-0.021,-20.002Z" style="fill:#f1bc00;"/><path d="M121.239,37.997l17.325,10.003l0,-4.001l-20.79,-12.004l3.465,6.002Z" style="fill:#e5ad00;"/><path d="M155.889,37.997l-17.325,10.003l0,-4.001l20.79,-12.004l-3.465,6.002Z" style="fill:#f3c800;"/><path d="M117.774,12.004l20.79,12.004l0,-8.003l-13.86,-8.002l-6.93,4.001Z" style="fill:#f8c700;"/><path d="M159.354,12.004l-20.79,12.004l0,-8.003l13.86,-8.002l6.93,4.001Z" style="fill:#ffe200;"/><path d="M124.704,8.003l13.86,8.002l13.86,-8.002l-13.86,-8.003l-13.86,8.003Z" style="fill:#fe0;"/></g><path d="M199.923,278.009l-6.928,3.994l3.466,5.993l6.926,-3.999l-3.464,-5.988Z" style="fill:#8f0812;"/><path d="M251.923,335.009l-6.928,3.994l3.466,5.993l6.926,-3.999l-3.464,-5.988Z" style="fill:#8f0812;"/><path d="M121.459,301.009l6.928,3.994l-3.467,5.993l-6.925,-3.999l3.464,-5.988Z" style="fill:#8f0812;"/><path d="M93.459,153.009l6.928,3.994l-3.467,5.993l-6.925,-3.999l3.464,-5.988Z" style="fill:#8f0812;"/><path d="M67.54,367.006l6.928,3.994l-3.467,5.993l-6.925,-3.999l3.464,-5.988Z" style="fill:#8f0812;"/><path d="M123.441,117.007l6.928,3.994l-3.466,5.992l-6.926,-3.998l3.464,-5.988Z" style="fill:#8f0812;"/><path d="M197.467,178.007l-6.929,3.994l3.467,5.993l6.926,-3.998l-3.464,-5.989Z" style="fill:#009bb3;"/><path d="M158.467,290.007l-6.929,3.994l3.467,5.993l6.926,-3.998l-3.464,-5.989Z" style="fill:#009bb3;"/><path d="M100.451,254.004l6.928,3.995l-3.466,5.992l-6.926,-3.998l3.464,-5.989Z" style="fill:#009bb3;"/><path d="M29.451,333.004l6.928,3.995l-3.466,5.992l-6.926,-3.998l3.464,-5.989Z" style="fill:#009bb3;"/><path d="M218.249,363.929l-6.929,3.994l3.467,5.993l6.926,-3.999l-3.464,-5.988Z" style="fill:#009bb3;"/><path d="M169.738,158.013l-6.928,3.994l3.467,5.993l6.926,-3.999l-3.465,-5.988Z" style="fill:#7c13b7;"/><path d="M213.738,227.013l-6.928,3.994l3.467,5.993l6.926,-3.999l-3.465,-5.988Z" style="fill:#7c13b7;"/><path d="M121.236,194.004l6.928,3.995l-3.467,5.992l-6.925,-3.998l3.464,-5.989Z" style="fill:#7c13b7;"/><path d="M76.408,276.007l6.928,3.994l-3.467,5.992l-6.925,-3.998l3.464,-5.988Z" style="fill:#7c13b7;"/><path d="M116.408,391.007l6.928,3.994l-3.467,5.992l-6.925,-3.998l3.464,-5.988Z" style="fill:#7c13b7;"/><path d="M193.995,344.003l-6.928,3.994l3.466,5.993l6.926,-3.999l-3.464,-5.988Z" style="fill:#7c13b7;"/><path d="M155.882,206.013l-6.928,3.994l3.466,5.993l6.926,-3.999l-3.464,-5.988Z" style="fill:#ffd900;"/><path d="M158.882,395.013l-6.928,3.994l3.466,5.993l6.926,-3.999l-3.464,-5.988Z" style="fill:#ffd900;"/><path d="M170.882,105.013l-6.928,3.994l3.466,5.993l6.926,-3.999l-3.464,-5.988Z" style="fill:#ffd900;"/><path d="M85.687,186.007l6.928,3.994l-3.466,5.993l-6.926,-3.998l3.464,-5.989Z" style="fill:#ffd900;"/><path d="M69.508,334.001l6.928,3.995l-3.467,5.992l-6.925,-3.998l3.464,-5.989Z" style="fill:#ffd900;"/></svg>
+  
+  </div>
+  <div id="card" class="close-fully">
+    <!-- Nút đối xứng: khi mở ra dùng để chuyển trang -->
+    <button id="nextPage" title="Trang tiếp theo">&gt;</button>
 
+    <!-- INSIDE -->
+    <div id="card-inside">
+      <div class="wrap">
+        <div class="inside-left">
+          <div class="polaroid">
+            <div id="insideImg" class="img" style="background-image:url('page1.jpg')"></div>
+          </div>
+        </div>
+
+        <div class="inside-right">
+          <div class="pages wishesFont" id="pages">
+            <!-- Page 1 -->
+            <section class="page active">
+            <center>
+            <p> Em là một em bé thông minh, mọi vấn đề gì xảy đến em đều vượt qua hết òi, từ vui đến buồn đến đau khổ đến
+              hạnh phúc, nên vấn đề hiện tại chỉ là vấn đề nhỏ của em và của chúng ta thoi đúng hong nè :> &nbsp; </p>
+            <p> Lúc này là lúc em bé nên tận hưởng nè. Ở đây em hong hề
+              tủi thân đâu, đặc biệt là Phúc Thành của em lúc nào cũng đang kéo tinh thần em bé đóooooo
+              <br>
+            </center>
+            </section>
+
+            <!-- Page 2 -->
+            <section class="page" data-img="page2.jpg">
+              <p>Em bé từng chịu nhiều tổn thương rồi, anh tin em bé cũng từng cố gắng rất nhiều nhưng mà chưa gặt lại được
+               những gì như em bé mong muốn.
+              </p>
+              <p>Giờ thì có anh ở đây rồi. Anh sẽ luôn bên em, yêu thương em và bảo vệ em. Anh muốn em cứ cư xử như một em bé 
+                khi ở bên anh, anh sẽ lo mọi thứ khác cho em.
+              </p>
+            </section>
+
+            <!-- Page 3 -->
+            <section class="page" data-img="page3.jpg">
+              <p>Anh xin lỗi vì hay chụp hình em nhiều, hay chọc em, hay ghẹo em, nhưng bởi vì em đáng yêu quá, nên anh hông có
+                kìm được cảm xúc mình khi ở bên em.
+              </p>
+              <p>Anh cứ muốn chọc em hàng ngày, chọc em rồi dỗ em hun em cho em cảm thấy vui, em là em bé của anh mò hê hê</p>
+            </section>
+
+            <!-- Page 4 -->
+            <section class="page" data-img="page4.jpg">
+              <p>Về phần anh thì anh chưa hoàn hảo, anh cảm thấy mình chưa tốt, nên bản thân vẫn phải cố gắng, sợ em buồn, sợ em cảm thấy
+                thất vọng, nên đôi khi anh quá độ vì anh cảm giác không an toàn, nhưng mà có 1 điều anh chắc chắn
+              </p>
+              <p>Hãy cứ khóc khi em muốn khóc, hãy cứ buồn khi em muốn buồn, anh sẽ luôn ở bên em, ôm em vào lòng và
+                an ủi em được, lúc nào cũng sẽ vậy.
+              </p>                
+            </section>
+
+            <!-- Page 5 -->
+            <section class="page" data-img="page5.jpg">
+              <p>Về chúng ta, thời gian bên nhau chưa dài, cũng chưa có danh phận =))), tuy nhiên thì anh mong chúng ta có thể sẽ đi được thật lâu. Cùng nhau cố gắng
+              , cùng nhau phát triển. Tôn trọng nhường nhịn yêu thương nhau một chút, anh đợi được tới 1 ngày có danh phận, nhưng khi cho danh phận rồi thì vẫn nhớ yêu thương anh nhé
+              Anh cũng không dừng lại ở những gì anh có, anh muốn ở bên em lâu dài hehehe</p>
+            </section>
+          </div>
+
+          <div id="pageIndicator">1 / 5</div>
+        </div>
       </div>
     </div>
     <div id="card-front">
       <div class="wrap">
-        <h1>Đây là thư dỗ em bé Như Quỳnh</h1>
+        <h1>Giáng sinh<br>cho Minh Thư</h1>
+        <h4>Gửi vài lời cho em</h4>
+        <h4>Từ người yêu tương lai của em</h4>
+
         <div class="cake_and_velas">
           <div class="velas">
             <div class="fuego"></div>
@@ -96,19 +472,86 @@
           </svg>
         </div>
       </div>
-      <button id="open" data-balloon="Bấm zô đây nè!" data-balloon-length="medium" data-balloon-pos="left"
-        data-balloon-visible>&gt;</button>
-      <button id="close" data-balloon="ɘƨolɔ ỗʜɔ àl γàn" data-balloon-length="medium" data-balloon-pos="left"
-        data-balloon-visible>&lt;</button>
-      <div class="card-front_inside">
-        <br> <br> <br>
-        <div class="polaroid">
-          <div class="img" style="background-image: url('file.jpg')"></div>
+        <div class="card-front_inside">
+          <br> <br> <br>
+          <div class="polaroid">
+            <div class="img" style="background-image:url('file.jpg')"></div>
         </div>
         <div class="shadow"></div>
       </div>
     </div>
-    <script src="cheerup.js"></script>
-</body>
 
+    <!-- Open / Close -->
+    <button id="open" title="Mở thiệp">&gt;</button>
+    <button id="close" title="Đóng thiệp">&lt;</button>
+  </div>
+
+  <script>
+    const card = document.getElementById("card");
+    const openBtn = document.getElementById("open");
+    const closeBtn = document.getElementById("close");
+    const nextPageBtn = document.getElementById("nextPage");
+    const insideImg = document.getElementById("insideImg");
+
+    const pages = Array.from(document.querySelectorAll("#pages .page"));
+    const indicator = document.getElementById("pageIndicator");
+    let pageIndex = 0;
+
+    function renderPage(){
+      pages.forEach((p, i) => p.classList.toggle("active", i === pageIndex));
+      indicator.textContent = `${pageIndex + 1} / ${pages.length}`;
+      const img = pages[pageIndex].dataset.img;
+      if (insideImg && img) {
+        insideImg.style.backgroundImage = `url('${img}')`;
+      }
+    }
+
+    function resetPages(){
+      pageIndex = 0;
+      renderPage();
+    }
+
+    function openCard(){
+      card.classList.remove("close-fully");
+      card.classList.add("open-half");
+
+      setTimeout(() => {
+        card.classList.remove("open-half");
+        card.classList.add("open-fully");
+      }, 1000);
+    }
+
+    function closeCard(){
+      card.classList.remove("open-fully", "open-half");
+      card.classList.add("close-fully");
+      resetPages();
+    }
+
+    openBtn.addEventListener("click", openCard);
+    closeBtn.addEventListener("click", closeCard);
+
+    // Next page button (chỉ khi mở fully)
+    nextPageBtn.addEventListener("click", () => {
+      if (!card.classList.contains("open-fully")) return;
+      pageIndex = Math.min(pageIndex + 1, pages.length - 1); // không quay vòng
+      renderPage();
+    });
+
+    // Optional: phím mũi tên khi đang mở
+    document.addEventListener("keydown", (e) => {
+      if (!card.classList.contains("open-fully")) return;
+      if (e.key === "ArrowRight") {
+        pageIndex = Math.min(pageIndex + 1, pages.length - 1);
+        renderPage();
+      }
+      if (e.key === "ArrowLeft") {
+        pageIndex = Math.max(pageIndex - 1, 0);
+        renderPage();
+      }
+      if (e.key === "Escape") closeCard();
+    });
+
+    renderPage();
+  </script>
+</body>
 </html>

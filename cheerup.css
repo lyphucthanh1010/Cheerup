@@ -7,8 +7,7 @@
 }
 
 body {
-  background: #E5E5E5;
-  background-image: url("bg.jpg");
+  background: linear-gradient(135deg, #C9E4DE 0%, #4D8E83 100%);
 }
 
 #card-front {
@@ -97,8 +96,8 @@ p.signed {
 
 #card-front {
   background-color: #ee9ca7;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#09FF63FF), to(#057809));
-  background-image: linear-gradient(top, #09FF63FF 0%, #057809 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#F9CADBFF), to(#FDA6C4FF));
+  background-image: linear-gradient(top, #F9CADBFF 0%, #FDA6C4FF 100%);
   -webkit-transform-origin: left;
   transform-origin: left;
   -webkit-transition: -webkit-transform 1s linear;
